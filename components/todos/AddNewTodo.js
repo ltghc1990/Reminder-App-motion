@@ -4,7 +4,8 @@ import { TodoContext } from "../../store/TodoProvider";
 
 // once a task is added we want to disable the input, so we need to accept a prop from the parent
 const AddNewTodo = ({ hideAddNewTodo }) => {
-  const { dispatch } = useContext(TodoContext);
+  const { list, dispatch } = useContext(TodoContext);
+  const currentlist = list.currentList;
   const [newTodo, setNewTodo] = useState("");
   const [error, setError] = useState(false);
   const focusTask = useRef();
@@ -26,7 +27,7 @@ const AddNewTodo = ({ hideAddNewTodo }) => {
       setError(true);
       return;
     }
-    dispatch({ type: "ADD_TODO", task: newTodo });
+    dispatch({ type: "ADD_TODO", task: newTodo, createdAt: currentlist });
     // clear input
     setNewTodo("");
     // hide input
@@ -43,7 +44,7 @@ const AddNewTodo = ({ hideAddNewTodo }) => {
         animate="animate"
         className="border-b-2"
       >
-        <div className="flex justify-between ">
+        <div className="flex justify-between items-center ">
           <input
             ref={focusTask}
             type="text"
@@ -52,9 +53,20 @@ const AddNewTodo = ({ hideAddNewTodo }) => {
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
           />
-          <div>
-            <button>Submit</button>
-          </div>
+          <button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
         </div>
       </motion.form>
       {error && <span>Must not leave input blank!</span>}

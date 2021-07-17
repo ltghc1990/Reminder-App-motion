@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
 // ui
 import Container from "../components/ui/Container";
 import Reminder from "../components/Reminder";
 import Sidebar from "../components/Sidebar";
 
-//  we need a function to stop the animation from happening everytime, so what we can do is have a useEffect we know means the animation has rendered and then turn of the animation
 export default function Home() {
+  // determine what reminder displays when which list is selected. default is All, if we click on home, filter task with home on reminders
+
   const [openSidebar, setOpenSidebar] = useState(false);
+
   return (
     <div className="bg-gray-200 h-screen">
       <Container>
-        <div className="flex border-2">
+        <div className="flex rounded-md overflow-hidden">
           {openSidebar && <Sidebar />}
           <div
             className="absolute"
