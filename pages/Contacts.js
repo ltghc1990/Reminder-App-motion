@@ -1,7 +1,7 @@
 import React from "react";
 
 const Contacts = () => {
-  return <div className="bg-blue-600 h-screen"></div>;
+  return <div className="The About Page"></div>;
 };
 
 export default Contacts;

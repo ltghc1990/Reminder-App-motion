@@ -1,12 +1,13 @@
 import React from "react";
 import Header from "./Header";
+import Container from "../ui/Container";
 
 const Layout = (props) => {
   return (
-    <div className="h-screen bg-gray-200 overflow-auto">
+    <Container>
       <Header />
       {props.children}
-    </div>
+    </Container>
   );
 };
 

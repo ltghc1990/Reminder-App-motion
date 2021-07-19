@@ -13,6 +13,9 @@ const AddNewTodo = ({ hideAddNewTodo }) => {
   // focus input when it renders
   useEffect(() => {
     focusTask.current.focus();
+  }, []);
+
+  useEffect(() => {
     // if theres a error message get rid of it in 3 secs
     if (error) {
       setTimeout(() => {
@@ -42,9 +45,9 @@ const AddNewTodo = ({ hideAddNewTodo }) => {
         variants={{ init: { opacity: 0 }, animate: { opacity: 1 } }}
         initial="init"
         animate="animate"
-        className="border-b-2"
+        className="border-b-2 mb-8"
       >
-        <div className="flex justify-between items-center ">
+        <div className="relative flex justify-between items-center ">
           <input
             ref={focusTask}
             type="text"
@@ -53,7 +56,7 @@ const AddNewTodo = ({ hideAddNewTodo }) => {
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
           />
-          <button>
+          <button className="absolute p-2 right-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"

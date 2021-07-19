@@ -3,17 +3,14 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <div className="flex justify-between py-2 mb-14">
+    <div className="flex items-center py-10 space-x-3">
       <Link href="/">
-        <a className="btn">HOME</a>
+        <a className=" border-b-2 focus:border-gray-900">Reminders</a>
       </Link>
       <nav>
         <ul>
           <Link href="/About">
-            <a className="btn">About</a>
-          </Link>
-          <Link href="/Contacts">
-            <a className="btn">Contacts</a>
+            <a className=" border-b-2 focus:border-gray-900">About</a>
           </Link>
         </ul>
       </nav>

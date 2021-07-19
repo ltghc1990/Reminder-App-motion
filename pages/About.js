@@ -1,10 +1,12 @@
 import React from "react";
-import Container from "../components/ui/Container";
 
 const About = () => {
   return (
-    <div className="bg-yellow-400 h-screen">
-      <Container OuterBg="bg-yellow-200" InnerBg="bg-white"></Container>
+    <div className="mx-auto bg-gray-100 rounded-xl shadow-xl">
+      <div className="p-8">
+        <h1 className="text-5xl font-semibold mb-8">About</h1>
+        <p>Demo app from MirageJS</p>
+      </div>
     </div>
   );
 };

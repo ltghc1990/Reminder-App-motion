@@ -20,20 +20,21 @@ export const TodoProvider = ({ children }) => {
         ];
       case "DELETE_TODO":
         return state.filter((todo) => todo.id !== action.id);
+      case "DELETE_TODOS":
+        return state.filter((todo) => todo.createdAt !== action.listname);
       default:
         return state;
     }
   };
   const [todos, dispatch] = useReducer(todoReducer, initialTodos);
-  // when the list is set to all in sidebar, we filter the todos by then give it to reminders
 
   // i guess we fetch our todos from the list,
   const [list, setList] = useState({
     currentList: "All",
     lists: [
-      { name: "All", id: 1 },
-      { name: "Home", id: 2 },
-      { name: "Work", id: 3 },
+      { name: "All", id: uuidv4() },
+      { name: "Home", id: uuidv4() },
+      { name: "Work", id: uuidv4() },
     ],
   });
 
@@ -46,11 +47,25 @@ export const TodoProvider = ({ children }) => {
     });
   };
 
-  const AddList = (list) => {
+  const addList = (listname) => {
     // create the list obj
-    let newList = { name: list, id: uuidv4() };
+    let newList = { name: listname, id: uuidv4() };
+    console.log(newList);
 
-    setList({ ...list, lists: [...list.lists, { newList }] });
+    setList({ ...list, lists: [...list.lists, newList] });
+  };
+
+  const deleteList = (listname) => {
+    // list removal
+    const allList = list.lists;
+    const newList = allList.filter((list) => list.name !== listname);
+    // also need to set the current list after delete
+    setList({
+      currentList: "All",
+      lists: newList,
+    });
+    // need to also remove the todos associated with the list
+    dispatch({ type: "DELETE_TODOS", listname });
   };
 
   const filterTodosByList = (list) => {
@@ -69,7 +84,8 @@ export const TodoProvider = ({ children }) => {
         list,
         setCurrentList,
         filterTodosByList,
-        AddList,
+        addList,
+        deleteList,
       }}
     >
       {children}

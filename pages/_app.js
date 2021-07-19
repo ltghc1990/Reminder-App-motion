@@ -5,13 +5,13 @@ import { TodoProvider } from "../store/TodoProvider";
 
 function MyApp({ Component, pageProps, router }) {
   return (
-    <TodoProvider>
-      <Layout>
-        <AnimatePresence exitBeforeEnter>
+    <Layout>
+      <AnimatePresence exitBeforeEnter>
+        <TodoProvider>
           <Component key={router.route} {...pageProps} />
-        </AnimatePresence>
-      </Layout>
-    </TodoProvider>
+        </TodoProvider>
+      </AnimatePresence>
+    </Layout>
   );
 }
 

@@ -1,7 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 // ui
-import Container from "../components/ui/Container";
 import Reminder from "../components/Reminder";
 import Sidebar from "../components/Sidebar";
 
@@ -10,20 +9,17 @@ export default function Home() {
 
   const [openSidebar, setOpenSidebar] = useState(false);
 
+  const sidebarToggle = () => {
+    setOpenSidebar(!openSidebar);
+  };
+
   return (
-    <div className="bg-gray-200 h-screen">
-      <Container>
-        <div className="flex rounded-md overflow-hidden">
-          {openSidebar && <Sidebar />}
-          <div
-            className="absolute"
-            onClick={() => setOpenSidebar(!openSidebar)}
-          >
-            X
-          </div>
-          <Reminder />
-        </div>
-      </Container>
+    <div className="pb-8">
+      <div className="flex rounded-md overflow-hidden shadow-xl">
+        {openSidebar && <Sidebar />}
+
+        <Reminder sidebarToggle={sidebarToggle} />
+      </div>
     </div>
   );
 }
