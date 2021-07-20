@@ -45,7 +45,7 @@ const AddNewTodo = ({ hideAddNewTodo }) => {
         variants={{ init: { opacity: 0 }, animate: { opacity: 1 } }}
         initial="init"
         animate="animate"
-        className="border-b-2 mb-8"
+        className="border-b-2 mb-8 lg:mb-4"
       >
         <div className="relative flex justify-between items-center ">
           <input

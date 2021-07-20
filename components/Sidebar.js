@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { TodoContext } from "../store/TodoProvider";
 
@@ -7,7 +7,7 @@ import AddNewList from "./todos/AddNewList";
 
 // the parent will decide if its open or not
 const Sidebar = () => {
-  // need to focus the child input when we click
+  const ChildInputRef = useRef(null);
 
   const { list, setCurrentList } = useContext(TodoContext);
   const { lists } = list;
@@ -30,8 +30,16 @@ const Sidebar = () => {
     setCurrentList(listname);
   };
 
+  // this is to focus the input when showAddNewList is true
+  useEffect(() => {
+    // defaults going to be null since the input isnt rendered yet
+    if (ChildInputRef.current !== null) {
+      ChildInputRef.current.focus();
+    }
+  }, [showAddNewList]);
+
   const toggleAddNewList = () => {
-    setShowAddNewList(!setShowAddNewList);
+    setShowAddNewList(!showAddNewList);
   };
 
   // parent div has flex
@@ -51,11 +59,12 @@ const Sidebar = () => {
             </li>
           );
         })}
-        {showAddNewList && <AddNewList hideInput={toggleAddNewList} />}
+        {showAddNewList && (
+          <AddNewList hideInput={toggleAddNewList} ref={ChildInputRef} />
+        )}
       </ul>
-      {/* Add a component where we can use addList to create a new list */}
       <button
-        onClick={() => setShowAddNewList(!showAddNewList)}
+        onClick={toggleAddNewList}
         className="flex items-center absolute bottom-6 left-6"
       >
         <svg

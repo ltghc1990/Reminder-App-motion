@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, forwardRef } from "react";
 import { TodoContext } from "../../store/TodoProvider";
 
 // motion
@@ -6,9 +6,13 @@ import { motion } from "framer-motion";
 import { FadeIn } from "../../lib/motionUtil";
 
 // can prob make this a generic component which we pass prop
-const AddNewList = ({ hideInput }) => {
+const AddNewList = ({ hideInput }, ref) => {
   const { addList } = useContext(TodoContext);
   const [inputValue, setInputValue] = useState("");
+
+  const onClickHandler = () => {
+    console.log(ref.current);
+  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -49,11 +53,13 @@ const AddNewList = ({ hideInput }) => {
           className="w-full py-1.5 pl-6 text-white bg-gray-700 border"
           placeholder="New List..."
           value={inputValue}
+          ref={ref}
           onChange={(e) => setInputValue(e.target.value)}
+          onClick={onClickHandler}
         />
       </div>
     </motion.form>
   );
 };
 
-export default AddNewList;
+export default forwardRef(AddNewList);
