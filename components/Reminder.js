@@ -6,7 +6,7 @@ const Reminder = ({ sidebarToggle }) => {
   const [showNewReminder, setShowNewReminder] = useState(false);
 
   return (
-    <div className="p-6 pb-8 flex-grow bg-white relative lg:p-12 lg:pb-20">
+    <div className="p-6 pb-12 flex-grow bg-white relative lg:p-12 lg:pb-20">
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-3xl font-bold text-gray-700">Reminders</h1>
 

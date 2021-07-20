@@ -38,7 +38,9 @@ const TodoList = () => {
               clipRule="evenodd"
             />
           </svg>
-          <span className="text-xs">Delete List</span>
+          <span className="text-xs text-gray-400 hover:text-gray-900">
+            Delete List
+          </span>
         </button>
       )}
     </motion.ul>

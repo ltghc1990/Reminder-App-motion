@@ -5,19 +5,19 @@ import { TodoContext } from "../../store/TodoProvider";
 import { motion } from "framer-motion";
 import { FadeIn } from "../../lib/motionUtil";
 
-// can prop make this a generic component which we pass place
-const AddNewList = () => {
+// can prob make this a generic component which we pass prop
+const AddNewList = ({ hideInput }) => {
   const { addList } = useContext(TodoContext);
   const [inputValue, setInputValue] = useState("");
 
   const onSubmitHandler = (e) => {
+    e.preventDefault();
     if (inputValue === "") {
       return;
     }
-    e.preventDefault();
     addList(inputValue);
     setInputValue("");
-    // needs to be untoggled when submitted
+    hideInput();
   };
   return (
     <motion.form

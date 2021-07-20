@@ -7,10 +7,13 @@ import AddNewList from "./todos/AddNewList";
 
 // the parent will decide if its open or not
 const Sidebar = () => {
-  const { list, setCurrentList, AddList } = useContext(TodoContext);
+  // need to focus the child input when we click
+
+  const { list, setCurrentList } = useContext(TodoContext);
   const { lists } = list;
 
   // if true show the addlistInput
+  // the AddNewList needs this as well since we want to close the input once its submited
   const [showAddNewList, setShowAddNewList] = useState(false);
 
   // activate css on a item in a list
@@ -25,6 +28,10 @@ const Sidebar = () => {
       setSelected(selected);
     }
     setCurrentList(listname);
+  };
+
+  const toggleAddNewList = () => {
+    setShowAddNewList(!setShowAddNewList);
   };
 
   // parent div has flex
@@ -44,7 +51,7 @@ const Sidebar = () => {
             </li>
           );
         })}
-        {showAddNewList && <AddNewList />}
+        {showAddNewList && <AddNewList hideInput={toggleAddNewList} />}
       </ul>
       {/* Add a component where we can use addList to create a new list */}
       <button
@@ -63,7 +70,9 @@ const Sidebar = () => {
             clipRule="evenodd"
           />
         </svg>
-        <span className="text-xs">Add List</span>
+        <span className="text-xs text-gray-400 hover:text-gray-50">
+          Add List
+        </span>
       </button>
     </motion.div>
   );
